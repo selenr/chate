@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adult Dating Groups</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background: linear-gradient(145deg, #0c0a16, #05030c);
+        }
+
+        .container {
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+
+            display: flex;
+            flex-direction: column;
+            min-height: 90vh; /* bikin ruang biar footer turun */
+        }
+
+        .content {
+            flex: 1; /* dorong footer ke bawah */
+        }
+
+        .profile {
+            width: 120px;
+            height: 120px;
+            margin: 50px auto 15px;
+            border-radius: 50%;
+            border: 1px solid black;
+            overflow: hidden;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .profile img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: red;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            background: rgba(30, 25, 47, 0.6);
+            backdrop-filter: blur(4px);
+            border-radius: 50px;
+            padding: 12px 20px;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border-color: #ff6a9e;
+        }
+
+        .btn:active { transform: scale(0.98); }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(-6px); }
+            40% { transform: translateX(6px); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+            100% { transform: translateX(0); }
+        }
+
+        .btn-shake { animation: shake 0.4s ease-in-out; }
+        .periodic-shake { animation: shake 0.6s ease-in-out; }
+
+        .btn-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icon {
+            width: 45px;
+            height: 45px;
+            background: #2a1f3e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+        }
+
+        .wa .icon { background: #075e54; color: white; }
+        .tg .icon { background: #2aabee; color: white; }
+
+        .btn-info h3 {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        /* ✅ FOOTER FIX */
+        .footer {
+            font-size: 0.75rem;
+            color: #5f5080;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 500px) {
+            h1 { font-size: 1.5rem; }
+            .profile { width: 100px; height: 100px; }
+            .btn-info h3 { font-size: 1rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="content">
+        <div class="profile">
+            <img id="profileImg" alt="Profile">
+        </div>
+
+        <h1> Adult Whatsapp Groups </h1>
+
+        <div class="btn-group">
+            <div class="btn wa" id="waLink">
+                <div class="btn-left">
+                    <div class="icon"><i class="fab fa-whatsapp"></i></div>
+                    <div class="btn-info"><h3>Whatsapp</h3></div>
+                </div>
+            </div>
+
+            <div class="btn tg" id="tgLink">
+                <div class="btn-left">
+                    <div class="icon"><i class="fab fa-telegram-plane"></i></div>
+                    <div class="btn-info"><h3>Telegram</h3></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✅ POSISI BAWAH (TAPI MASIH KELIHATAN) -->
+    <div class="footer">🔞 18+ Only • Verified Members</div>
+
+</div>
+
+<script src="config.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+    const profileImg = document.getElementById('profileImg');
+    const waBtn = document.getElementById('waLink');
+    const tgBtn = document.getElementById('tgLink');
+
+    if (typeof config !== 'undefined') {
+        if (config.profileImage) profileImg.src = config.profileImage;
+
+        if (config.background) {
+            document.body.style.background = config.background;
+            document.body.style.backgroundSize = 'cover';
+        }
+    }
+
+    function startShake() {
+        function shake() {
+            waBtn.classList.add('periodic-shake');
+            tgBtn.classList.add('periodic-shake');
+
+            setTimeout(() => {
+                waBtn.classList.remove('periodic-shake');
+                tgBtn.classList.remove('periodic-shake');
+            }, 600);
+        }
+
+        shake();
+        setInterval(shake, 5000);
+    }
+
+    window.addEventListener('load', startShake);
+
+    function handleClick(btn, link, name) {
+        btn.classList.add('btn-shake');
+
+        setTimeout(() => btn.classList.remove('btn-shake'), 400);
+
+        if (!link || link === '#') {
+            setTimeout(() => alert(`Link ${name} belum diatur`), 200);
+            return;
+        }
+
+        setTimeout(() => window.open(link, '_blank'), 200);
+    }
+
+    waBtn.addEventListener('click', () => {
+        const link = config?.whatsappLink || '#';
+        handleClick(waBtn, link, 'WhatsApp');
+    });
+
+    tgBtn.addEventListener('click', () => {
+        const link = config?.telegramLink || '#';
+        handleClick(tgBtn, link, 'Telegram');
+    });
+
+});
+</script>
+
+</body>
+</html>
