@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adult Dating Groups</title>
+    <title></title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
@@ -15,21 +16,20 @@
             display: flex;
             justify-content: center;
             padding: 20px;
-            background: linear-gradient(145deg, #0c0a16, #05030c);
+            background: black;
         }
 
         .container {
             max-width: 450px;
             width: 100%;
             text-align: center;
-
             display: flex;
             flex-direction: column;
-            min-height: 90vh; /* bikin ruang biar footer turun */
+            min-height: 90vh;
         }
 
         .content {
-            flex: 1; /* dorong footer ke bawah */
+            flex: 1;
         }
 
         .profile {
@@ -67,31 +67,15 @@
             backdrop-filter: blur(4px);
             border-radius: 50px;
             padding: 12px 20px;
-            text-decoration: none;
             border: 1px solid rgba(255,255,255,0.3);
-            transition: 0.2s;
             cursor: pointer;
+            transition: 0.2s;
         }
 
         .btn:hover {
             transform: scale(1.02);
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            border-color: #ff6a9e;
         }
-
-        .btn:active { transform: scale(0.98); }
-
-        @keyframes shake {
-            0% { transform: translateX(0); }
-            20% { transform: translateX(-6px); }
-            40% { transform: translateX(6px); }
-            60% { transform: translateX(-4px); }
-            80% { transform: translateX(4px); }
-            100% { transform: translateX(0); }
-        }
-
-        .btn-shake { animation: shake 0.4s ease-in-out; }
-        .periodic-shake { animation: shake 0.6s ease-in-out; }
 
         .btn-left {
             display: flex;
@@ -102,7 +86,6 @@
         .icon {
             width: 45px;
             height: 45px;
-            background: #2a1f3e;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -115,21 +98,12 @@
 
         .btn-info h3 {
             color: white;
-            font-size: 1.2rem;
         }
 
-        /* ✅ FOOTER FIX */
         .footer {
             font-size: 0.75rem;
-            color: #5f5080;
+            color: #aaa;
             margin-top: 30px;
-            margin-bottom: 10px;
-        }
-
-        @media (max-width: 500px) {
-            h1 { font-size: 1.5rem; }
-            .profile { width: 100px; height: 100px; }
-            .btn-info h3 { font-size: 1rem; }
         }
     </style>
 </head>
@@ -140,7 +114,7 @@
 
     <div class="content">
         <div class="profile">
-            <img id="profileImg" alt="Profile">
+            <img id="profileImg">
         </div>
 
         <h1>❤️ Adult Whatsapp Groups ❤️</h1>
@@ -162,7 +136,6 @@
         </div>
     </div>
 
-    <!-- ✅ POSISI BAWAH (TAPI MASIH KELIHATAN) -->
     <div class="footer">🔞 18+ Only • Verified Members</div>
 
 </div>
@@ -176,53 +149,43 @@ document.addEventListener('DOMContentLoaded', function() {
     const waBtn = document.getElementById('waLink');
     const tgBtn = document.getElementById('tgLink');
 
+    // ✅ ambil dari config
     if (typeof config !== 'undefined') {
         if (config.profileImage) profileImg.src = config.profileImage;
 
-        if (config.background) {
-            document.body.style.background = config.background;
-            document.body.style.backgroundSize = 'cover';
-        }
-    }
+        // 🔥 BACKGROUND SLIDE
+        const backgrounds = config.backgrounds || [];
+        let index = 0;
 
-    function startShake() {
-        function shake() {
-            waBtn.classList.add('periodic-shake');
-            tgBtn.classList.add('periodic-shake');
+        function changeBackground() {
+            if (backgrounds.length === 0) return;
 
-            setTimeout(() => {
-                waBtn.classList.remove('periodic-shake');
-                tgBtn.classList.remove('periodic-shake');
-            }, 600);
+            document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.transition = "background-image 1s ease-in-out";
+
+            index = (index + 1) % backgrounds.length;
         }
 
-        shake();
-        setInterval(shake, 5000);
+        changeBackground();
+        setInterval(changeBackground, 5000);
     }
 
-    window.addEventListener('load', startShake);
-
-    function handleClick(btn, link, name) {
-        btn.classList.add('btn-shake');
-
-        setTimeout(() => btn.classList.remove('btn-shake'), 400);
-
+    function handleClick(btn, link) {
         if (!link || link === '#') {
-            setTimeout(() => alert(`Link ${name} belum diatur`), 200);
+            alert("Link belum diatur");
             return;
         }
-
-        setTimeout(() => window.open(link, '_blank'), 200);
+        window.open(link, '_blank');
     }
 
     waBtn.addEventListener('click', () => {
-        const link = config?.whatsappLink || '#';
-        handleClick(waBtn, link, 'WhatsApp');
+        handleClick(waBtn, config?.whatsappLink);
     });
 
     tgBtn.addEventListener('click', () => {
-        const link = config?.telegramLink || '#';
-        handleClick(tgBtn, link, 'Telegram');
+        handleClick(tgBtn, config?.telegramLink);
     });
 
 });
