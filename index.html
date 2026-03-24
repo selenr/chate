@@ -1,142 +1,198 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: Arial, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            padding: 20px;
-            background: black;
-        }
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background: black;
+}
 
-        .container {
-            max-width: 450px;
-            width: 100%;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            min-height: 90vh;
-        }
+/* CONTAINER */
+.container {
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 90vh;
+}
 
-        .content {
-            flex: 1;
-        }
+.content { flex: 1; }
 
-        .profile {
-            width: 120px;
-            height: 120px;
-            margin: 50px auto 15px;
-            border-radius: 50%;
-            border: 1px solid black;
-            overflow: hidden;
-            background: rgba(255,255,255,0.1);
-        }
+/* PROFILE */
+.profile {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 50px auto 15px;
+    border-radius: 50%;
+    overflow: hidden;
+}
 
-        .profile img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            color: red;
-        }
+/* 🔥 VERIFIED PREMIUM */
+.verified {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
 
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        .btn {
-            display: flex;
-            align-items: center;
-            background: rgba(30, 25, 47, 0.6);
-            backdrop-filter: blur(4px);
-            border-radius: 50px;
-            padding: 12px 20px;
-            border: 1px solid rgba(255,255,255,0.3);
-            cursor: pointer;
-            transition: 0.2s;
-        }
+    box-shadow: 0 0 10px rgba(0,114,255,0.8);
 
-        .btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
+    /* animasi muncul */
+    opacity: 0;
+    transform: scale(0.5);
+    animation: fadeIn 0.6s ease forwards 0.5s;
+}
 
-        .btn-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+/* icon centang */
+.verified i {
+    color: white;
+    font-size: 14px;
+}
 
-        .icon {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-        }
+/* 🔥 pulse halus */
+@keyframes pulsePremium {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 8px rgba(0,114,255,0.6);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 18px rgba(0,114,255,1);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 8px rgba(0,114,255,0.6);
+    }
+}
 
-        .wa .icon { background: #075e54; color: white; }
-        .tg .icon { background: #2aabee; color: white; }
+/* 🔥 muncul halus */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
 
-        .btn-info h3 {
-            color: white;
-        }
+/* aktifkan animasi setelah muncul */
+.verified.active {
+    animation: pulsePremium 2s infinite;
+}
 
-        .footer {
-            font-size: 0.75rem;
-            color: #aaa;
-            margin-top: 30px;
-        }
-    </style>
+/* TITLE */
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: red;
+}
+
+/* BUTTON */
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    background: rgba(30, 25, 47, 0.6);
+    border-radius: 50px;
+    padding: 12px 20px;
+    border: 1px solid rgba(255,255,255,0.3);
+    cursor: pointer;
+}
+
+.btn-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wa .icon { background: #075e54; color: white; }
+.tg .icon { background: #2aabee; color: white; }
+
+.btn-info h3 { color: white; }
+
+/* FOOTER */
+.footer {
+    font-size: 0.75rem;
+    color: #aaa;
+    margin-top: 30px;
+}
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-    <div class="content">
-        <div class="profile">
-            <img id="profileImg">
+<div class="content">
+
+    <div class="profile">
+        <img id="profileImg">
+
+        <!-- 🔥 VERIFIED -->
+        <div class="verified" id="verified">
+            <i class="fas fa-check"></i>
+        </div>
+    </div>
+
+    <h1>❤️ Adult Whatsapp Groups ❤️</h1>
+
+    <div class="btn-group">
+        <div class="btn wa" id="waLink">
+            <div class="btn-left">
+                <div class="icon"><i class="fab fa-whatsapp"></i></div>
+                <div class="btn-info"><h3>Whatsapp</h3></div>
+            </div>
         </div>
 
-        <h1>❤️ Adult Whatsapp Groups ❤️</h1>
-
-        <div class="btn-group">
-            <div class="btn wa" id="waLink">
-                <div class="btn-left">
-                    <div class="icon"><i class="fab fa-whatsapp"></i></div>
-                    <div class="btn-info"><h3>Whatsapp</h3></div>
-                </div>
-            </div>
-
-            <div class="btn tg" id="tgLink">
-                <div class="btn-left">
-                    <div class="icon"><i class="fab fa-telegram-plane"></i></div>
-                    <div class="btn-info"><h3>Telegram</h3></div>
-                </div>
+        <div class="btn tg" id="tgLink">
+            <div class="btn-left">
+                <div class="icon"><i class="fab fa-telegram-plane"></i></div>
+                <div class="btn-info"><h3>Telegram</h3></div>
             </div>
         </div>
     </div>
 
-    <div class="footer">🔞 18+ Only • Verified Members</div>
+</div>
+
+<div class="footer">🔞 18+ Only • Verified Members</div>
 
 </div>
 
@@ -146,14 +202,18 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     const profileImg = document.getElementById('profileImg');
-    const waBtn = document.getElementById('waLink');
-    const tgBtn = document.getElementById('tgLink');
+    const verified = document.getElementById('verified');
 
-    // ✅ ambil dari config
     if (typeof config !== 'undefined') {
+
         if (config.profileImage) profileImg.src = config.profileImage;
 
-        // 🔥 BACKGROUND SLIDE
+        // 🔥 aktifkan animasi setelah muncul
+        setTimeout(() => {
+            verified.classList.add("active");
+        }, 800);
+
+        // 🔥 background slide
         const backgrounds = config.backgrounds || [];
         let index = 0;
 
@@ -163,30 +223,14 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
             document.body.style.backgroundSize = "cover";
             document.body.style.backgroundPosition = "center";
-            document.body.style.transition = "background-image 1s ease-in-out";
+            document.body.style.transition = "background-image 2s ease-in-out";
 
             index = (index + 1) % backgrounds.length;
         }
 
         changeBackground();
-        setInterval(changeBackground, 5000);
+        setInterval(changeBackground, 3000);
     }
-
-    function handleClick(btn, link) {
-        if (!link || link === '#') {
-            alert("Link belum diatur");
-            return;
-        }
-        window.open(link, '_blank');
-    }
-
-    waBtn.addEventListener('click', () => {
-        handleClick(waBtn, config?.whatsappLink);
-    });
-
-    tgBtn.addEventListener('click', () => {
-        handleClick(tgBtn, config?.telegramLink);
-    });
 
 });
 </script>
