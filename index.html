@@ -185,7 +185,7 @@ h1 {
         </div>
     </div>
 
-    <h1>🔥 Join Active Groups 🔥</h1>
+    <h1> Join Active Groups </h1>
 
     <div class="btn-group">
         <div class="btn wa" id="waLink">
@@ -205,11 +205,11 @@ h1 {
 
 </div>
 
-<div class="footer">🔞 18+ Only • Verified Members</div>
+<div class="footer"> 18+ Only • Verified Members</div>
 
 </div>
 
-<!-- CONFIG (TIDAK DIUBAH) -->
+<!-- CONFIG -->
 <script src="config.js"></script>
 
 <script>
@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', function() {
             verified.classList.add("active");
         }, 500);
 
-        // BACKGROUND SLIDE (tetap pakai config)
+        // BACKGROUND SLIDE
         const backgrounds = config.backgrounds || [];
         let index = 0;
 
@@ -253,7 +253,50 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // =========================
-    // 🔥 ANIMASI ADVANCE
+    // PERBAIKAN: TOMBOL BISA DIKLIK
+    // =========================
+    
+    // Tombol WhatsApp
+    if (waBtn) {
+        waBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            waClicked = true;
+            
+            // Ambil link dari config (whatsappLink sesuai config.js)
+            let waLink = null;
+            if (typeof config !== 'undefined') {
+                waLink = config.whatsappLink || config.waLink;
+            }
+            
+            if (waLink) {
+                window.open(waLink, "_blank");
+            } else {
+                alert("Link WhatsApp belum tersedia di config");
+            }
+        });
+    }
+    
+    // Tombol Telegram
+    if (tgBtn) {
+        tgBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            
+            // Ambil link dari config (telegramLink sesuai config.js)
+            let tgLink = null;
+            if (typeof config !== 'undefined') {
+                tgLink = config.telegramLink || config.tgLink;
+            }
+            
+            if (tgLink) {
+                window.open(tgLink, "_blank");
+            } else {
+                alert("Link Telegram belum tersedia di config");
+            }
+        });
+    }
+
+    // =========================
+    //  ANIMASI (tetap sama persis seperti aslinya)
     // =========================
 
     // WA attention awal
@@ -268,11 +311,6 @@ document.addEventListener('DOMContentLoaded', function() {
             waBtn.style.animation = "pulseBtn 3s infinite, glowBtn 3s infinite";
         }, 500);
     }, 1200);
-
-    // klik WA
-    waBtn.addEventListener("click", () => {
-        waClicked = true;
-    });
 
     // telegram shake normal
     setInterval(() => {
