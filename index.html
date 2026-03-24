@@ -47,7 +47,7 @@ body {
     object-fit: cover;
 }
 
-/* 🔥 VERIFIED PREMIUM */
+/* VERIFIED PREMIUM */
 .verified {
     position: absolute;
     bottom: 5px;
@@ -63,19 +63,25 @@ body {
 
     box-shadow: 0 0 10px rgba(0,114,255,0.8);
 
-    /* animasi muncul */
     opacity: 0;
     transform: scale(0.5);
-    animation: fadeIn 0.6s ease forwards 0.5s;
 }
 
-/* icon centang */
+/* icon */
 .verified i {
     color: white;
     font-size: 14px;
 }
 
-/* 🔥 pulse halus */
+/* animasi muncul */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* animasi pulse */
 @keyframes pulsePremium {
     0% {
         transform: scale(1);
@@ -91,17 +97,9 @@ body {
     }
 }
 
-/* 🔥 muncul halus */
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-/* aktifkan animasi setelah muncul */
+/* FIX UTAMA: gabung animasi */
 .verified.active {
-    animation: pulsePremium 2s infinite;
+    animation: fadeIn 0.6s ease forwards, pulsePremium 1.5s infinite;
 }
 
 /* TITLE */
@@ -166,13 +164,13 @@ h1 {
     <div class="profile">
         <img id="profileImg">
 
-        <!-- 🔥 VERIFIED -->
+        <!-- VERIFIED -->
         <div class="verified" id="verified">
             <i class="fas fa-check"></i>
         </div>
     </div>
 
-    <h1>❤️ Adult Whatsapp Groups ❤️</h1>
+    <h1>🔥 Adult Whatsapp Groups 🔥</h1>
 
     <div class="btn-group">
         <div class="btn wa" id="waLink">
@@ -206,14 +204,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (typeof config !== 'undefined') {
 
-        if (config.profileImage) profileImg.src = config.profileImage;
+        if (config.profileImage) {
+            profileImg.src = config.profileImage;
+        }
 
-        // 🔥 aktifkan animasi setelah muncul
+        // AKTIFKAN VERIFIED (fix animasi)
         setTimeout(() => {
             verified.classList.add("active");
-        }, 800);
+        }, 500);
 
-        // 🔥 background slide
+        // BACKGROUND SLIDE
         const backgrounds = config.backgrounds || [];
         let index = 0;
 
@@ -223,13 +223,13 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
             document.body.style.backgroundSize = "cover";
             document.body.style.backgroundPosition = "center";
-            document.body.style.transition = "background-image 2s ease-in-out";
+            document.body.style.transition = "background-image 1s ease-in-out";
 
             index = (index + 1) % backgrounds.length;
         }
 
         changeBackground();
-        setInterval(changeBackground, 3000);
+        setInterval(changeBackground, 2500); // 🔥 lebih cepat
     }
 
 });
