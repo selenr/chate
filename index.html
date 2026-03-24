@@ -107,6 +107,7 @@ h1 {
     padding:12px 20px;
     border:1px solid rgba(255,255,255,0.3);
     cursor:pointer;
+    text-decoration: none;
 }
 
 .btn-left {
@@ -185,22 +186,22 @@ h1 {
         </div>
     </div>
 
-    <h1>🔥Join Active Groups🔥</h1>
+    <h1> Join Active Groups </h1>
 
     <div class="btn-group">
-        <div class="btn wa" id="waLink">
+        <a class="btn wa" id="waLink" target="_blank" rel="noopener noreferrer">
             <div class="btn-left">
                 <div class="icon"><i class="fab fa-whatsapp"></i></div>
                 <div class="btn-info"><h3>WhatsApp</h3></div>
             </div>
-        </div>
+        </a>
 
-        <div class="btn tg" id="tgLink">
+        <a class="btn tg" id="tgLink" target="_blank" rel="noopener noreferrer">
             <div class="btn-left">
                 <div class="icon"><i class="fab fa-telegram-plane"></i></div>
                 <div class="btn-info"><h3>Telegram</h3></div>
             </div>
-        </div>
+        </a>
     </div>
 
 </div>
@@ -217,8 +218,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const profileImg = document.getElementById('profileImg');
     const verified = document.getElementById('verified');
-    const waBtn = document.querySelector(".wa");
-    const tgBtn = document.querySelector(".tg");
+    const waBtn = document.getElementById("waLink");
+    const tgBtn = document.getElementById("tgLink");
 
     let waClicked = false;
 
@@ -253,50 +254,48 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // =========================
-    // PERBAIKAN: TOMBOL BISA DIKLIK
+    // SET LINK KE TOMBOL (pakai href, bukan JavaScript)
     // =========================
     
-    // Tombol WhatsApp
-    if (waBtn) {
-        waBtn.addEventListener("click", function(e) {
-            e.preventDefault();
+    // Set link WhatsApp
+    if (waBtn && typeof config !== 'undefined') {
+        const waLink = config.whatsappLink || config.waLink;
+        if (waLink) {
+            waBtn.href = waLink;
+        } else {
+            waBtn.href = "#";
+            waBtn.addEventListener("click", function(e) {
+                if (!waBtn.href || waBtn.href === "#" || waBtn.href === window.location.href) {
+                    e.preventDefault();
+                    alert("Link WhatsApp belum tersedia di config");
+                }
+            });
+        }
+        
+        // Catat klik untuk animasi
+        waBtn.addEventListener("click", function() {
             waClicked = true;
-            
-            // Ambil link dari config (whatsappLink sesuai config.js)
-            let waLink = null;
-            if (typeof config !== 'undefined') {
-                waLink = config.whatsappLink || config.waLink;
-            }
-            
-            if (waLink) {
-                window.open(waLink, "_blank");
-            } else {
-                alert("Link WhatsApp belum tersedia di config");
-            }
         });
     }
     
-    // Tombol Telegram
-    if (tgBtn) {
-        tgBtn.addEventListener("click", function(e) {
-            e.preventDefault();
-            
-            // Ambil link dari config (telegramLink sesuai config.js)
-            let tgLink = null;
-            if (typeof config !== 'undefined') {
-                tgLink = config.telegramLink || config.tgLink;
-            }
-            
-            if (tgLink) {
-                window.open(tgLink, "_blank");
-            } else {
-                alert("Link Telegram belum tersedia di config");
-            }
-        });
+    // Set link Telegram
+    if (tgBtn && typeof config !== 'undefined') {
+        const tgLink = config.telegramLink || config.tgLink;
+        if (tgLink) {
+            tgBtn.href = tgLink;
+        } else {
+            tgBtn.href = "#";
+            tgBtn.addEventListener("click", function(e) {
+                if (!tgBtn.href || tgBtn.href === "#" || tgBtn.href === window.location.href) {
+                    e.preventDefault();
+                    alert("Link Telegram belum tersedia di config");
+                }
+            });
+        }
     }
 
     // =========================
-    //  ANIMASI (tetap sama persis seperti aslinya)
+    //  ANIMASI (tetap sama persis)
     // =========================
 
     // WA attention awal
