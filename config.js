@@ -1,11 +1,11 @@
 const config = {
-    profileImage: "https://i.imgur.com/QKamZn4.jpeg",
+    profileImage: "https://images2.imgbox.com/b0/28/RlehZTyk_o.jpg",
 
     backgrounds: [
-        "https://i.imgur.com/7PGQf5k.jpeg",
-        "https://images2.imgbox.com/a2/d0/PQWBiPeU_o.jpg"
+        "https://ihttps://images2.imgbox.com/fa/77/TwnEc3Cj_o.jpg",
+        "https://images2.imgbox.com/6f/43/sUmUfZl7_o.jpg"
     ],
 
-    whatsappLink: "https://ngele.infinityfreeapp.com/click.php?",
-    telegramLink: "https://ngele.infinityfreeapp.com/click.php?"
+    whatsappLink: "https://tapthelink.cfd/bTthF",
+    telegramLink: "https://tapthelink.cfd/bTthF"
 };
