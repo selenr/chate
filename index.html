@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title></title>
+<title>Join Active Groups 🔥</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -39,57 +39,93 @@ body {
     height:120px;
     margin:50px auto 15px;
     border-radius:50%;
-    overflow:hidden;
+    overflow: visible;
 }
 
 .profile img {
     width:100%;
     height:100%;
     object-fit:cover;
+    border-radius:50%;
+    display:block;
 }
 
-/* VERIFIED */
+/* VERIFIED BADGE - SETENGAH DI LUAR */
 .verified {
     position:absolute;
-    bottom:5px;
-    right:5px;
-    width:30px;
-    height:30px;
-    border-radius:50%;
-    background:linear-gradient(135deg,#00c6ff,#0072ff);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 0 10px rgba(0,114,255,0.8);
-    opacity:0;
-    transform:scale(0.5);
+    bottom: -5px;
+    right: -5px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #0072ff;
+    border: 3px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    opacity: 0;
+    transform: scale(0.5);
+    z-index: 999;
 }
 
 .verified i {
-    color:white;
-    font-size:14px;
+    color: white;
+    font-size: 16px;
 }
 
 /* ANIMASI VERIFIED */
-@keyframes fadeIn {
-    to { opacity:1; transform:scale(1); }
+@keyframes fadeInScale {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @keyframes pulsePremium {
-    0% { transform:scale(1); }
-    50% { transform:scale(1.1); }
-    100% { transform:scale(1); }
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
 
 .verified.active {
-    animation: fadeIn 0.5s forwards, pulsePremium 2s infinite;
+    animation: fadeInScale 0.4s forwards, pulsePremium 2s infinite;
 }
 
 /* TITLE */
 h1 {
     font-size:1.8rem;
-    margin-bottom:20px;
+    margin-bottom:10px;
     color:white;
+}
+
+/* MEMBER COUNT */
+.member-count {
+    background: rgba(255,255,255,0.08);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 18px;
+    border-radius: 50px;
+    margin: 5px auto 25px;
+    font-size: 0.85rem;
+    color: #fff;
+}
+
+.member-count i {
+    color: #25D366;
+    font-size: 14px;
+}
+
+.member-count .dot {
+    color: #ffaa00;
+    font-size: 14px;
+}
+
+.member-count .active-icon {
+    color: #ffaa00;
+    font-size: 10px;
+    margin-right: 4px;
 }
 
 /* BUTTON */
@@ -130,33 +166,27 @@ h1 {
 
 .btn-info h3 { color:white; }
 
-/* ===== ANIMASI BUTTON ===== */
-
-/* WA utama */
+/* ANIMASI BUTTON */
 .wa {
   animation: pulseBtn 3s infinite, glowBtn 3s infinite;
 }
 
-/* TELEGRAM */
 .tg {
   transition:0.2s;
 }
 
-/* PULSE */
 @keyframes pulseBtn {
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
 
-/* GLOW */
 @keyframes glowBtn {
   0% { box-shadow: 0 0 5px rgba(37,211,102,0.5); }
   50% { box-shadow: 0 0 18px rgba(37,211,102,1); }
   100% { box-shadow: 0 0 5px rgba(37,211,102,0.5); }
 }
 
-/* SHAKE */
 @keyframes shake {
   0%,100% { transform: translateX(0); }
   25% { transform: translateX(-4px); }
@@ -179,14 +209,20 @@ h1 {
 <div class="content">
 
     <div class="profile">
-        <img id="profileImg">
-
+        <img id="profileImg" src="https://via.placeholder.com/120x120?text=Photo">
         <div class="verified" id="verified">
             <i class="fas fa-check"></i>
         </div>
     </div>
 
     <h1>🔥Join Active Groups🔥</h1>
+
+    <!-- MEMBER COUNT -->
+    <div class="member-count">
+        <i class="fas fa-users"></i> 24,568 Members
+        <span class="dot">⚡</span>
+        <span><i class="fas fa-circle active-icon"></i> 6,892 Active Now</span>
+    </div>
 
     <div class="btn-group">
         <a class="btn wa" id="waLink" target="_blank" rel="noopener noreferrer">
@@ -210,7 +246,6 @@ h1 {
 
 </div>
 
-<!-- CONFIG -->
 <script src="config.js"></script>
 
 <script>
@@ -223,16 +258,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let waClicked = false;
 
+    // CENTANG MUNCUL
+    setTimeout(() => {
+        verified.classList.add("active");
+    }, 500);
+
     if (typeof config !== 'undefined') {
 
         if (config.profileImage) {
             profileImg.src = config.profileImage;
         }
-
-        // VERIFIED
-        setTimeout(() => {
-            verified.classList.add("active");
-        }, 500);
 
         // BACKGROUND SLIDE
         const backgrounds = config.backgrounds || [];
@@ -244,7 +279,6 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
             document.body.style.backgroundSize = "cover";
             document.body.style.backgroundPosition = "center";
-            document.body.style.transition = "background-image 1s ease-in-out";
 
             index = (index + 1) % backgrounds.length;
         }
@@ -253,11 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setInterval(changeBackground, 4000);
     }
 
-    // =========================
-    // SET LINK KE TOMBOL (pakai href, bukan JavaScript)
-    // =========================
-    
-    // Set link WhatsApp
+    // SET LINK
     if (waBtn && typeof config !== 'undefined') {
         const waLink = config.whatsappLink || config.waLink;
         if (waLink) {
@@ -265,20 +295,16 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             waBtn.href = "#";
             waBtn.addEventListener("click", function(e) {
-                if (!waBtn.href || waBtn.href === "#" || waBtn.href === window.location.href) {
-                    e.preventDefault();
-                    alert("Link WhatsApp belum tersedia di config");
-                }
+                e.preventDefault();
+                alert("Link WhatsApp belum tersedia di config");
             });
         }
         
-        // Catat klik untuk animasi
         waBtn.addEventListener("click", function() {
             waClicked = true;
         });
     }
     
-    // Set link Telegram
     if (tgBtn && typeof config !== 'undefined') {
         const tgLink = config.telegramLink || config.tgLink;
         if (tgLink) {
@@ -286,56 +312,52 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             tgBtn.href = "#";
             tgBtn.addEventListener("click", function(e) {
-                if (!tgBtn.href || tgBtn.href === "#" || tgBtn.href === window.location.href) {
-                    e.preventDefault();
-                    alert("Link Telegram belum tersedia di config");
-                }
+                e.preventDefault();
+                alert("Link Telegram belum tersedia di config");
             });
         }
     }
 
-    // =========================
-    //  ANIMASI (tetap sama persis)
-    // =========================
+    // ANIMASI
+    if (waBtn) {
+        setTimeout(() => {
+            waBtn.style.animation = "none";
 
-    // WA attention awal
-    setTimeout(() => {
-        waBtn.style.animation = "none";
+            setTimeout(() => {
+                waBtn.style.animation = "shake 0.4s";
+            }, 50);
+
+            setTimeout(() => {
+                waBtn.style.animation = "pulseBtn 3s infinite, glowBtn 3s infinite";
+            }, 500);
+        }, 1200);
+    }
+
+    if (tgBtn) {
+        setInterval(() => {
+            tgBtn.style.animation = "shake 0.4s";
+
+            setTimeout(() => {
+                tgBtn.style.animation = "none";
+            }, 400);
+        }, 7000);
 
         setTimeout(() => {
-            waBtn.style.animation = "shake 0.4s";
-        }, 50);
+            if (!waClicked) {
 
-        setTimeout(() => {
-            waBtn.style.animation = "pulseBtn 3s infinite, glowBtn 3s infinite";
-        }, 500);
-    }, 1200);
+                tgBtn.style.animation = "pulseBtn 2s infinite";
 
-    // telegram shake normal
-    setInterval(() => {
-        tgBtn.style.animation = "shake 0.4s";
+                setInterval(() => {
+                    tgBtn.style.animation = "shake 0.4s";
 
-        setTimeout(() => {
-            tgBtn.style.animation = "none";
-        }, 400);
-    }, 7000);
+                    setTimeout(() => {
+                        tgBtn.style.animation = "pulseBtn 2s infinite";
+                    }, 400);
 
-    // telegram boost jika WA tidak diklik
-    setTimeout(() => {
-        if (!waClicked) {
-
-            tgBtn.style.animation = "pulseBtn 2s infinite";
-
-            setInterval(() => {
-                tgBtn.style.animation = "shake 0.4s";
-
-                setTimeout(() => {
-                    tgBtn.style.animation = "pulseBtn 2s infinite";
-                }, 400);
-
-            }, 5000);
-        }
-    }, 8000);
+                }, 5000);
+            }
+        }, 8000);
+    }
 
 });
 </script>
