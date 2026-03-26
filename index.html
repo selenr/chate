@@ -18,6 +18,7 @@ body {
     justify-content:center;
     padding:20px;
     background:black;
+    transition: background-image 0.8s ease-in-out;
 }
 
 /* CONTAINER */
@@ -269,22 +270,32 @@ document.addEventListener('DOMContentLoaded', function() {
             profileImg.src = config.profileImage;
         }
 
-        // BACKGROUND SLIDE
+        // ========== BACKGROUND SLIDE DENGAN TRANSISI LEMBUT + PRELOAD ==========
         const backgrounds = config.backgrounds || [];
         let index = 0;
-
-        function changeBackground() {
+        
+        function preloadAndChange() {
             if (backgrounds.length === 0) return;
-
+            
+            // Preload gambar berikutnya biar transisi halus
+            const nextIndex = (index + 1) % backgrounds.length;
+            const nextImg = new Image();
+            nextImg.src = backgrounds[nextIndex];
+            
+            // Ganti background sekarang
             document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
             document.body.style.backgroundSize = "cover";
             document.body.style.backgroundPosition = "center";
-
+            
             index = (index + 1) % backgrounds.length;
         }
-
-        changeBackground();
-        setInterval(changeBackground, 4000);
+        
+        // Mulai background slide
+        if (backgrounds.length > 0) {
+            preloadAndChange();
+            setInterval(preloadAndChange, 5000); // ganti tiap 5 detik
+        }
+        // =======================================================================
     }
 
     // SET LINK
