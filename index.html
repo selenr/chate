@@ -51,20 +51,20 @@ body {
     display:block;
 }
 
-/* VERIFIED BADGE - SETENGAH DI LUAR */
+/* VERIFIED BADGE - MENYATU (tanpa border, tanpa pulse) */
 .verified {
-    position:absolute;
-    bottom: -5px;
-    right: -5px;
-    width: 34px;
-    height: 34px;
+    position: absolute;
+    bottom: -3px;
+    right: -3px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: #0072ff;
-    border: 3px solid white;
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
     opacity: 0;
     transform: scale(0.5);
     z-index: 999;
@@ -72,25 +72,18 @@ body {
 
 .verified i {
     color: white;
-    font-size: 16px;
+    font-size: 14px;
 }
 
-/* ANIMASI VERIFIED */
+.verified.active {
+    animation: fadeInScale 0.4s forwards;
+}
+
 @keyframes fadeInScale {
     to {
         opacity: 1;
         transform: scale(1);
     }
-}
-
-@keyframes pulsePremium {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-.verified.active {
-    animation: fadeInScale 0.4s forwards, pulsePremium 2s infinite;
 }
 
 /* TITLE */
@@ -270,7 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
             profileImg.src = config.profileImage;
         }
 
-        // ========== BACKGROUND SLIDE DENGAN TRANSISI LEMBUT + PRELOAD ==========
+        // BACKGROUND SLIDE DENGAN TRANSISI LEMBUT + PRELOAD
         const backgrounds = config.backgrounds || [];
         let index = 0;
         
@@ -293,9 +286,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Mulai background slide
         if (backgrounds.length > 0) {
             preloadAndChange();
-            setInterval(preloadAndChange, 5000); // ganti tiap 5 detik
+            setInterval(preloadAndChange, 5000);
         }
-        // =======================================================================
     }
 
     // SET LINK
