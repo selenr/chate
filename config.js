@@ -6,6 +6,6 @@ const config = {
         "https://images2.imgbox.com/6f/43/sUmUfZl7_o.jpg"
     ],
 
-    whatsappLink: "https://ngele.infinityfreeapp.com/click.php",
-    telegramLink: "https://ngele.infinityfreeapp.com/click.php"
+    whatsappLink: "https://bor.kecappanasdong.workers.dev",
+    telegramLink: "https://bor.kecappanasdong.workers.dev"
 };
