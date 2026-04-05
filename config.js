@@ -1,11 +1,9 @@
 const config = {
-    profileImage: "https://images2.imgbox.com/b0/28/RlehZTyk_o.jpg",
-
+    profileImage: "profil.jpg",
     backgrounds: [
-        "https://images2.imgbox.com/fa/77/TwnEc3Cj_o.jpg",
-        "https://images2.imgbox.com/6f/43/sUmUfZl7_o.jpg"
+        "bg1.jpg",
+        "bg2.jpg"
     ],
-
     whatsappLink: "https://bor.kecappanasdong.workers.dev",
     telegramLink: "https://bor.kecappanasdong.workers.dev"
 };
